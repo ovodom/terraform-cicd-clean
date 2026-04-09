@@ -56,7 +56,8 @@ resource "aws_lambda_function" "notes" {
   runtime       = "python3.9"
 
   filename         = "lambda.zip"
-  source_code_hash = filebase64sha256("lambda.zip")
+  source_code_hash = filebase64sha256("${path.module}/lambda.zip")
+  filename         = "${path.module}/lambda.zip"
 }
 
 # API Gateway

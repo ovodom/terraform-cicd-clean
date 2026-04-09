@@ -11,7 +11,9 @@
   uses: hashicorp/setup-terraform@v3
 
 - name: Create Lambda zip
-  run: zip lambda.zip app.py
+  run: |
+    zip lambda.zip app.py
+    ls -la
 
 - name: Terraform Init
   run: terraform init
