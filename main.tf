@@ -50,14 +50,13 @@ resource "aws_iam_role_policy" "ddb" {
 
 # Lambda
 resource "aws_lambda_function" "notes" {
-  function_name = "notes-api-clean"
+  function_name = "notes-api"
   role          = aws_iam_role.lambda_role.arn
   handler       = "app.lambda_handler"
   runtime       = "python3.9"
 
-  filename         = "lambda.zip"
-  source_code_hash = filebase64sha256("${path.module}/lambda.zip")
   filename         = "${path.module}/lambda.zip"
+  source_code_hash = filebase64sha256("${path.module}/lambda.zip")
 }
 
 # API Gateway
