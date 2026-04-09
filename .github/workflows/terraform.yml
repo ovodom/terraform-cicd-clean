@@ -1,25 +1,23 @@
-- name: Checkout
-  uses: actions/checkout@v3
+steps:
+  - uses: actions/checkout@v3
 
-- name: Configure AWS credentials
-  uses: aws-actions/configure-aws-credentials@v4
-  with:
-    role-to-assume: arn:aws:iam::630287362492:role/github-terraform-role
-    aws-region: eu-north-1
+  - name: Configure AWS credentials
+    uses: aws-actions/configure-aws-credentials@v4
+    with:
+      role-to-assume: arn:aws:iam::630287362492:role/github-terraform-role
+      aws-region: eu-north-1
 
-- name: Setup Terraform
-  uses: hashicorp/setup-terraform@v3
+  - name: Setup Terraform
+    uses: hashicorp/setup-terraform@v3
 
-- name: Create Lambda zip
-  run: |
-    zip lambda.zip app.py
-    ls -la
+  - name: Create Lambda zip
+    run: zip lambda.zip app.py
 
-- name: Debug files
-  run: ls -la    
+  - name: Verify files
+    run: ls -la
 
-- name: Terraform Init
-  run: terraform init
+  - name: Terraform Init
+    run: terraform init
 
-- name: Terraform Apply
-  run: terraform apply -auto-approve
+  - name: Terraform Apply
+    run: terraform apply -auto-approve
